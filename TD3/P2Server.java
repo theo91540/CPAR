@@ -1,6 +1,8 @@
 package TD3;
 
-import java.rmi.Naming;
+import java.rmi.*;
+import java.rmi.registry.*;
+import java.rmi.server.*;
 
 public class P2Server
 {
@@ -8,8 +10,9 @@ public class P2Server
 	{
 		try 
 		{
+			Registry reg = LocateRegistry.createRegistry(1100);
 			P2I p2 = new P2Impl();
-			Naming.rebind("rmi://localhost/P2", p2);
+			reg.rebind("P2", p2);
 		} 
 		catch (Exception e) 
 		{
