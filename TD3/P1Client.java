@@ -9,13 +9,14 @@ public class P1Client
 	{
 		try 
 		{
-			// Recuperation du registre
 			Registry reg = LocateRegistry.getRegistry("127.0.0.1", 1100);
-			
-			// Recuperation des objets distants
 			P1I p1 = (P1I) reg.lookup("P1");
-			P2I p2 = (P2I) reg.lookup("P2");
-			P3I p3 = (P3I) reg.lookup("P3");
+
+			Registry reg2 = LocateRegistry.getRegistry("127.0.0.1", 1101);
+			P2I p2 = (P2I) reg2.lookup("P2");
+
+			Registry reg3 = LocateRegistry.getRegistry("127.0.0.1", 1102);
+			P3I p3 = (P3I) reg3.lookup("P3");
 
 			// Debut du protocole
 			p3.isJobDoneE();

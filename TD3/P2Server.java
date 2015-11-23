@@ -11,7 +11,7 @@ public class P2Server
 		try 
 		{
 			// Creation du registre serveur
-			Registry reg = LocateRegistry.createRegistry(1100);
+			Registry reg = LocateRegistry.createRegistry(1101);
 
 			// Creation de l'objet distant
 			P2I p2 = new P2Impl();

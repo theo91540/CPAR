@@ -12,7 +12,7 @@ public class P3Server
 		{
 			
 			// Creation du registre serveur
-			Registry reg = LocateRegistry.createRegistry(1100);
+			Registry reg = LocateRegistry.createRegistry(1102);
 
 			// Creation de l'objet distant
 			P3I p3 = new P3Impl();
