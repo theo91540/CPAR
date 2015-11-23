@@ -5,12 +5,14 @@ import java.rmi.server.*;
 
 public class P3Impl extends UnicastRemoteObject implements P3I
 {
-	private boolean doneE = false;
-	private boolean doneF = false;
+	private boolean doneE;
+	private boolean doneF;
 
 	public P3Impl() throws RemoteException
 	{ 
 		super();
+		this.doneE = false;
+		this.doneF = false;
 	}
 
 	public void E() throws RemoteException
@@ -33,6 +35,8 @@ public class P3Impl extends UnicastRemoteObject implements P3I
 	{
 		if(!doneE)
 			try{ wait();} catch (InterruptedException e) {e.printStackTrace();}
+
+		this.notifyAll();
 	} 
 
 	synchronized public void jobDoneF()
@@ -45,5 +49,7 @@ public class P3Impl extends UnicastRemoteObject implements P3I
 	{
 		if(!doneF)
 			try{ wait();} catch (InterruptedException e) {e.printStackTrace();}
+		
+		this.notifyAll();
 	} 
 }

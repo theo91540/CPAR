@@ -5,11 +5,12 @@ import java.rmi.server.*;
 
 public class P2Impl extends UnicastRemoteObject implements P2I
 {
-	private boolean doneG = false;
+	private boolean doneG;
 
 	public P2Impl() throws RemoteException
 	{ 
 		super();
+		this.doneG = false;
 	}
 
 	public void G() throws RemoteException
@@ -27,5 +28,7 @@ public class P2Impl extends UnicastRemoteObject implements P2I
 	{
 		if(!doneG)
 			try{ wait();} catch (InterruptedException e) {e.printStackTrace();}
+
+		this.notifyAll();
 	} 
 }
