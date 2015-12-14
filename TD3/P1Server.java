@@ -21,25 +21,10 @@ public class P1Server
 		P2I p2 = null;
 		P3I p3 = null;
 
-		Registry registry = null;
-		try 
-		{	
-			registry = LocateRegistry.getRegistry(1099);
-		} 
-		catch(RemoteException re)
-		{
-			registry = LocateRegistry.createRegistry(1099);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Impossible d'accéder au registre");
-		}
-
-		p1 = new P1Impl();
-
 		try
 		{
-			registry.rebind("P1", p1);
+			p1 = new P1Impl();
+			Naming.rebind("rmi://localhost:1099/P1", p1);
 		}
 		catch (Exception e) 
 		{
@@ -57,8 +42,7 @@ public class P1Server
 			error = false;
 			try
 			{
-				Registry reg2 = LocateRegistry.getRegistry(ip_p2, 1099);
-				p2 = (P2I) reg2.lookup("P2");
+				p2 = (P2I) Naming.lookup("rmi://"+ip_p2+"/P2");
 			}	
 			catch (Exception e)
 			{
@@ -77,8 +61,7 @@ public class P1Server
 			error = false;
 			try
 			{
-				Registry reg3 = LocateRegistry.getRegistry(ip_p3, 1099);
-				p3 = (P3I) reg3.lookup("P3");
+				p3 = (P3I) Naming.lookup("rmi://"+ip_p3+"/P3");
 			}	
 			catch (Exception e)
 			{

@@ -20,21 +20,11 @@ public class P3Server
 		P1I p1 = null;
 		P2I p2 = null;
 		P3I p3 = null;
-
-		Registry registry = null;
-		try 
-		{	
-			registry = LocateRegistry.getRegistry(1099);
-		} 
-		catch(RemoteException re)
-		{
-			registry = LocateRegistry.createRegistry(1099);
-		}
 		
 		try
 		{
 			p3 = new P3Impl();
-			registry.rebind("P3", p3);
+			Naming.rebind("rmi://localhost:1099/P3", p3);
 		}
 		catch (Exception e) 
 		{
@@ -53,8 +43,7 @@ public class P3Server
 			error = false;
 			try
 			{
-				Registry reg3 = LocateRegistry.getRegistry(ip_p1, 1099);
-				p1 = (P1I) reg3.lookup("P1");
+				p1 = (P1I) Naming.lookup("rmi://"+ip_p1+"/P1");
 			}	
 			catch (Exception e)
 			{
@@ -74,8 +63,7 @@ public class P3Server
 			error = false;
 			try
 			{
-				Registry reg2 = LocateRegistry.getRegistry(ip_p2, 1099);
-				p2 = (P2I) reg2.lookup("P2");
+				p2 = (P2I) Naming.lookup("rmi://"+ip_p2+"/P2");
 			}	
 			catch (Exception e)
 			{

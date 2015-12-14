@@ -1,0 +1,7 @@
+module exo1corba {
+	interface Horloge {
+		readonly attribute string localite;
+		string getTime();
+		string getTimeZone();
+	};
+};

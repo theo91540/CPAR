@@ -21,20 +21,10 @@ public class P2Server
 		P2I p2 = null;
 		P3I p3 = null;
 
-		Registry registry = null;
-		try 
-		{	
-			registry = LocateRegistry.getRegistry(1099);
-		} 
-		catch(RemoteException re)
-		{
-			registry = LocateRegistry.createRegistry(1099);
-		}
-
 		try
 		{
 			p2 = new P2Impl();
-			registry.rebind("P2", p2);
+			Naming.rebind("rmi://localhost:1099/P2", p2);
 		}
 		catch (Exception e) 
 		{
@@ -53,8 +43,7 @@ public class P2Server
 			error = false;
 			try
 			{
-				Registry reg2 = LocateRegistry.getRegistry(ip_p1, 1099);
-				p1 = (P1I) reg2.lookup("P1");
+				p1 = (P1I) Naming.lookup("rmi://"+ip_p1+"/P1");
 			}	
 			catch (Exception e)
 			{
@@ -74,8 +63,7 @@ public class P2Server
 			error = false;
 			try
 			{
-				Registry reg3 = LocateRegistry.getRegistry(ip_p3, 1099);
-				p3 = (P3I) reg3.lookup("P3");
+				p3 = (P3I) Naming.lookup("rmi://"+ip_p3+"/P3");
 			}	
 			catch (Exception e)
 			{
